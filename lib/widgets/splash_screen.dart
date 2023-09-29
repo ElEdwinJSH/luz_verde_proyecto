@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:luz_verde_proyecto/screens/home_screen.dart';
