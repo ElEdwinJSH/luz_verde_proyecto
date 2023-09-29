@@ -27,7 +27,24 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
             child: ListView.builder(
               itemCount: cargas.length,
               itemBuilder: (ctx, index) {
-                return CargaItem(cargas[index]);
+                return Row(
+                  children: [
+                    Expanded(child: CargaItem(cargas[index])),
+                    Padding(
+                      padding: const EdgeInsets.all(0),
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.green),
+                        ),
+                        onPressed: () {
+                          _eliminarDispositivo(index);
+                        },
+                        child: Text('ti'),
+                      ),
+                    ),
+                  ],
+                );
               },
             ),
           ),
@@ -60,5 +77,11 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
         cargas.add(result as CargaElectrica);
       });
     }
+  }
+
+  void _eliminarDispositivo(int index) {
+    setState(() {
+      cargas.removeAt(index);
+    });
   }
 }

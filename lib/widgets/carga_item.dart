@@ -4,7 +4,7 @@ import '../models/carga.dart';
 class CargaItem extends StatelessWidget {
   final CargaElectrica carga;
 
-  CargaItem(this.carga);
+  const CargaItem(this.carga, {super.key});
 
   @override
   Widget build(BuildContext context) {
