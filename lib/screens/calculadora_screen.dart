@@ -27,24 +27,7 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
             child: ListView.builder(
               itemCount: cargas.length,
               itemBuilder: (ctx, index) {
-                return Row(
-                  children: [
-                    Expanded(child: CargaItem(cargas[index])),
-                    Padding(
-                      padding: const EdgeInsets.all(0),
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.green),
-                        ),
-                        onPressed: () {
-                          _eliminarDispositivo(index);
-                        },
-                        child: Text('ti'),
-                      ),
-                    ),
-                  ],
-                );
+                return CargaItem(cargas[index]);
               },
             ),
           ),
