@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/carga.dart';
+import 'package:luz_verde_proyecto/models/database.dart';
 
 class AgregarDispositivoScreen extends StatefulWidget {
   @override
@@ -86,7 +87,7 @@ class _AgregarDispositivoScreenState extends State<AgregarDispositivoScreen> {
               },
             ),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 if (_formKey.currentState!.validate()) {
                   final elemento = _elementoController.text;
                   final cantidad = int.parse(_cantidadController.text);
@@ -101,6 +102,9 @@ class _AgregarDispositivoScreenState extends State<AgregarDispositivoScreen> {
                     horasAlDia: horasAlDia,
                     energiaDia: energiaDia,
                   );
+                  final id =
+                      await DatabaseHelper.instance.insertCargas(nuevaCarga);
+
                   Navigator.of(context).pop(nuevaCarga);
                 }
               },
