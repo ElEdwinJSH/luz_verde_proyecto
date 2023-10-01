@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:luz_verde_proyecto/providers/theme.dart';
+import 'package:provider/provider.dart';
 import '../models/carga.dart';
 
 class AgregarDispositivoScreen extends StatefulWidget {
@@ -34,9 +36,17 @@ class _AgregarDispositivoScreenState extends State<AgregarDispositivoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final currentTheme = Provider.of<ThemeProvider>(context);
     return Scaffold(
+      backgroundColor: currentTheme.isDarkTheme()
+          ? Color.fromARGB(255, 86, 85, 106)
+          : Colors.white,
       appBar: AppBar(
-          title: Text('Agregar Dispositivo'), backgroundColor: Colors.green),
+        title: Text('Agregar Dispositivo'),
+        backgroundColor: currentTheme.isDarkTheme()
+            ? Colors.green.shade900
+            : Colors.green.shade600,
+      ),
       body: Form(
         key: _formKey,
         child: ListView(
@@ -44,7 +54,19 @@ class _AgregarDispositivoScreenState extends State<AgregarDispositivoScreen> {
           children: [
             TextFormField(
               controller: _elementoController,
-              decoration: InputDecoration(labelText: 'Elemento'),
+              decoration: InputDecoration(
+                labelText: 'Elemento',
+                labelStyle: TextStyle(
+                  color: currentTheme.isDarkTheme()
+                      ? Color.fromARGB(255, 196, 196, 196)
+                      : Color.fromARGB(255, 94, 94, 94),
+                  // Cambia los colores según tu preferencia
+                ),
+              ),
+              style: TextStyle(
+                color: currentTheme.isDarkTheme() ? Colors.white : Colors.black,
+                // Cambia los colores según tu preferencia
+              ),
               validator: (value) {
                 if (value!.isEmpty) {
                   return 'Por favor, ingrese un elemento';
@@ -54,7 +76,19 @@ class _AgregarDispositivoScreenState extends State<AgregarDispositivoScreen> {
             ),
             TextFormField(
               controller: _cantidadController,
-              decoration: InputDecoration(labelText: 'Cantidad'),
+              decoration: InputDecoration(
+                labelText: 'Cantidad',
+                labelStyle: TextStyle(
+                  color: currentTheme.isDarkTheme()
+                      ? Color.fromARGB(255, 196, 196, 196)
+                      : Color.fromARGB(255, 94, 94, 94),
+                  // Cambia los colores según tu preferencia
+                ),
+              ),
+              style: TextStyle(
+                color: currentTheme.isDarkTheme() ? Colors.white : Colors.black,
+                // Cambia los colores según tu preferencia
+              ),
               keyboardType: TextInputType.number,
               validator: (value) {
                 if (value!.isEmpty) {
@@ -65,7 +99,19 @@ class _AgregarDispositivoScreenState extends State<AgregarDispositivoScreen> {
             ),
             TextFormField(
               controller: _potenciaController,
-              decoration: InputDecoration(labelText: 'Potencia (Watts)'),
+              decoration: InputDecoration(
+                labelText: 'Potencia (Watts)',
+                labelStyle: TextStyle(
+                  color: currentTheme.isDarkTheme()
+                      ? Color.fromARGB(255, 196, 196, 196)
+                      : Color.fromARGB(255, 94, 94, 94),
+                  // Cambia los colores según tu preferencia
+                ),
+              ),
+              style: TextStyle(
+                color: currentTheme.isDarkTheme() ? Colors.white : Colors.black,
+                // Cambia los colores según tu preferencia
+              ),
               keyboardType: TextInputType.number,
               validator: (value) {
                 if (value!.isEmpty) {
@@ -76,7 +122,19 @@ class _AgregarDispositivoScreenState extends State<AgregarDispositivoScreen> {
             ),
             TextFormField(
               controller: _horasAlDiaController,
-              decoration: InputDecoration(labelText: 'Horas al día'),
+              decoration: InputDecoration(
+                labelText: 'Horas al día',
+                labelStyle: TextStyle(
+                  color: currentTheme.isDarkTheme()
+                      ? Color.fromARGB(255, 196, 196, 196)
+                      : Color.fromARGB(255, 94, 94, 94),
+                  // Cambia los colores según tu preferencia
+                ),
+              ),
+              style: TextStyle(
+                color: currentTheme.isDarkTheme() ? Colors.white : Colors.black,
+                // Cambia los colores según tu preferencia
+              ),
               keyboardType: TextInputType.number,
               validator: (value) {
                 if (value!.isEmpty) {
@@ -104,9 +162,19 @@ class _AgregarDispositivoScreenState extends State<AgregarDispositivoScreen> {
                   Navigator.of(context).pop(nuevaCarga);
                 }
               },
-              child: Text('Guardar'),
               style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.green),
+                backgroundColor: MaterialStateProperty.all(
+                    currentTheme.isDarkTheme()
+                        ? Colors.green.shade900
+                        : Colors.green.shade600),
+              ),
+              child: Text(
+                'Guardar',
+                style: TextStyle(
+                  color: currentTheme.isDarkTheme()
+                      ? Color.fromARGB(179, 250, 249, 249)
+                      : Colors.white,
+                ),
               ),
             ),
           ],

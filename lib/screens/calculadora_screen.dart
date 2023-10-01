@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../models/carga.dart';
 import '../widgets/carga_item.dart';
+import 'package:luz_verde_proyecto/providers/theme.dart';
+import 'package:provider/provider.dart';
 
 class CalculadoraScreen extends StatefulWidget {
   @override
@@ -12,6 +14,8 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final currentTheme = Provider.of<ThemeProvider>(context);
+
     double cargaTotal = 0.0;
 
     // Calcular la carga total
@@ -20,7 +24,7 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text('Luz Verde'), backgroundColor: Colors.green),
+      //appBar: AppBar(title: Text('Luz Verde'), backgroundColor: Colors.green),
       body: Column(
         children: [
           Expanded(
@@ -34,8 +38,10 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
                       padding: const EdgeInsets.all(0),
                       child: ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all(Colors.green),
+                          backgroundColor: MaterialStateProperty.all(
+                              currentTheme.isDarkTheme()
+                                  ? Color.fromARGB(255, 11, 22, 12)
+                                  : Colors.green.shade600),
                         ),
                         onPressed: () {
                           _eliminarDispositivo(index);
