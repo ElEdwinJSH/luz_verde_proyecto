@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../models/carga.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:provider/provider.dart';
+import 'package:luz_verde_proyecto/providers/list_carga_electrica.dart';
 
 class CargaItem extends StatelessWidget {
   final CargaElectrica carga;
@@ -9,6 +11,8 @@ class CargaItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cargas = Provider.of<ListCargaElectricaProvider>(context);
+
     return Slidable(
       startActionPane: ActionPane(
         // A motion is a widget used to control how the pane animates.
@@ -20,7 +24,7 @@ class CargaItem extends StatelessWidget {
         children: [
           // A SlidableAction can have an icon and/or a label.
           SlidableAction(
-            onPressed: (context) => 1,
+            onPressed: (context) => cargas.removeCargas(carga),
             backgroundColor: const Color(0xFFFE4A49),
             foregroundColor: Colors.white,
             icon: Icons.delete,

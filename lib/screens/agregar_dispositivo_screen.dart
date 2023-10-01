@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:luz_verde_proyecto/providers/list_carga_electrica.dart';
 import '../models/carga.dart';
 import 'package:luz_verde_proyecto/models/database.dart';
+import 'package:provider/provider.dart';
 
 class AgregarDispositivoScreen extends StatefulWidget {
+  const AgregarDispositivoScreen({super.key});
+
   @override
   _AgregarDispositivoScreenState createState() =>
       _AgregarDispositivoScreenState();
@@ -35,17 +39,20 @@ class _AgregarDispositivoScreenState extends State<AgregarDispositivoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final cargas = Provider.of<ListCargaElectricaProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
-          title: Text('Agregar Dispositivo'), backgroundColor: Colors.green),
+          title: const Text('Agregar Dispositivo'),
+          backgroundColor: Colors.green),
       body: Form(
         key: _formKey,
         child: ListView(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           children: [
             TextFormField(
               controller: _elementoController,
-              decoration: InputDecoration(labelText: 'Elemento'),
+              decoration: const InputDecoration(labelText: 'Elemento'),
               validator: (value) {
                 if (value!.isEmpty) {
                   return 'Por favor, ingrese un elemento';
@@ -55,7 +62,7 @@ class _AgregarDispositivoScreenState extends State<AgregarDispositivoScreen> {
             ),
             TextFormField(
               controller: _cantidadController,
-              decoration: InputDecoration(labelText: 'Cantidad'),
+              decoration: const InputDecoration(labelText: 'Cantidad'),
               keyboardType: TextInputType.number,
               validator: (value) {
                 if (value!.isEmpty) {
@@ -66,7 +73,7 @@ class _AgregarDispositivoScreenState extends State<AgregarDispositivoScreen> {
             ),
             TextFormField(
               controller: _potenciaController,
-              decoration: InputDecoration(labelText: 'Potencia (Watts)'),
+              decoration: const InputDecoration(labelText: 'Potencia (Watts)'),
               keyboardType: TextInputType.number,
               validator: (value) {
                 if (value!.isEmpty) {
@@ -77,7 +84,7 @@ class _AgregarDispositivoScreenState extends State<AgregarDispositivoScreen> {
             ),
             TextFormField(
               controller: _horasAlDiaController,
-              decoration: InputDecoration(labelText: 'Horas al día'),
+              decoration: const InputDecoration(labelText: 'Horas al día'),
               keyboardType: TextInputType.number,
               validator: (value) {
                 if (value!.isEmpty) {
@@ -104,14 +111,14 @@ class _AgregarDispositivoScreenState extends State<AgregarDispositivoScreen> {
                   );
                   final id =
                       await DatabaseHelper.instance.insertCargas(nuevaCarga);
-
+                  cargas.addCargas(nuevaCarga);
                   Navigator.of(context).pop(nuevaCarga);
                 }
               },
-              child: Text('Guardar'),
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.green),
               ),
+              child: const Text('Guardar'),
             ),
           ],
         ),

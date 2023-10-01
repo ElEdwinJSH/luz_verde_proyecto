@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
-import '../models/carga.dart';
+import 'package:luz_verde_proyecto/providers/list_carga_electrica.dart';
 import '../widgets/carga_item.dart';
+import 'package:provider/provider.dart';
 
 class CalculadoraScreen extends StatefulWidget {
+  const CalculadoraScreen({super.key});
+
   @override
   _CalculadoraScreenState createState() => _CalculadoraScreenState();
 }
 
 class _CalculadoraScreenState extends State<CalculadoraScreen> {
-  final List<CargaElectrica> cargas = [];
-
   @override
   Widget build(BuildContext context) {
+    final cargas = Provider.of<ListCargaElectricaProvider>(context);
+
     double cargaTotal = 0.0;
 
     // Calcular la carga total
-    for (var carga in cargas) {
+    for (var carga in cargas.items) {
       cargaTotal += carga.energiaDia;
     }
 
@@ -25,9 +28,9 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: cargas.length,
+              itemCount: cargas.items.length,
               itemBuilder: (ctx, index) {
-                return CargaItem(cargas[index]);
+                return CargaItem(cargas.items[index]);
               },
             ),
           ),
@@ -41,7 +44,7 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
                 backgroundColor: MaterialStateProperty.all(Colors.green),
               ),
               onPressed: () {
-                _agregarDispositivo(context);
+                Navigator.of(context).pushNamed('/agregar_dispositivo');
               },
               child: Text('Agregar Dispositivo'),
             ),
@@ -50,7 +53,7 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
       ),
     );
   }
-
+/*
   // Función para agregar un dispositivo
   void _agregarDispositivo(BuildContext context) async {
     final result =
@@ -67,4 +70,5 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
       cargas.removeAt(index);
     });
   }
+  */
 }
