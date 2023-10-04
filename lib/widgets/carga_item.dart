@@ -16,7 +16,7 @@ class CargaItem extends StatelessWidget {
     return Slidable(
       startActionPane: ActionPane(
         // A motion is a widget used to control how the pane animates.
-        motion: const BehindMotion(),
+        motion: const ScrollMotion(),
 
         // A pane can dismiss the Slidable.
 
@@ -24,11 +24,30 @@ class CargaItem extends StatelessWidget {
         children: [
           // A SlidableAction can have an icon and/or a label.
           SlidableAction(
-            onPressed: (context) => cargas.removeCargas(carga),
+            onPressed: (context) => showDialog<String>(
+              context: context,
+              builder: (BuildContext context) => AlertDialog(
+                title: const Text('Eliminar'),
+                content: const Text('¿Estas seguro?'),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'Cancelar'),
+                    child: const Text('Cancelar'),
+                  ),
+                  TextButton(
+                    onPressed: () =>
+                        {cargas.removeCargas(carga), Navigator.pop(context)},
+                    child: const Text('Si'),
+                  )
+                ],
+              ),
+            ),
+
             backgroundColor: const Color(0xFFFE4A49),
             foregroundColor: Colors.white,
             icon: Icons.delete,
             label: 'Eliminar',
+            //cargas.removeCargas(carga)
           ),
           SlidableAction(
             onPressed: (context) => 1,
