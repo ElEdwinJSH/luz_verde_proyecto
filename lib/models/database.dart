@@ -41,11 +41,40 @@ class DatabaseHelper {
       energiaDia REAL
     )
   ''');
+
+    await db.execute('''
+    CREATE TABLE IF NOT EXISTS registroCargas (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      totalCarga REAL NOT NULL
+    )
+  ''');
+
+    await db.execute('''
+    CREATE TABLE IF NOT EXISTS detallesRegistro (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      cargasId INT NOT NULL,
+      registroId INT NOT NULL,
+      FOREIGN KEY (cargasId) REFERENCES cargas(id),
+      FOREIGN KEY (registroId) REFERENCES registroCargas(id)
+    )
+  ''');
   }
 
   Future<List<Map<String, dynamic>>> getCargas() async {
     final db = await database;
     return await db.query('cargas');
+  }
+
+  Future<List<Map<String, dynamic>>> getRegistroCargas(int registroId) async {
+    final db = await database;
+    return await db.rawQuery('''
+    SELECT cargas.id, cargas.elemento, cargas.cantidad,cargas.potencia,cargas.horasAlDia,cargas.energiaAlDia
+    FROM cargas 
+    JOIN detallesRegistro ON detallesRegistro.cargasid=cargas.id 
+    JOIN registroCargas ON registroCargas.id=detallesRegistro.registroId
+    WHERE registroCargas.ID = ?
+
+  ''', [registroId]);
   }
 
   Future<int> insertCargas(CargaElectrica cargasData) async {

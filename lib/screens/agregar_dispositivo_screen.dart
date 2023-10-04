@@ -119,6 +119,8 @@ class _AgregarDispositivoScreenState extends State<AgregarDispositivoScreen> {
                       final id = await DatabaseHelper.instance
                           .insertCargas(nuevaCarga);
                       cargas.addCargas(nuevaCarga);
+                      print(await DatabaseHelper.instance.getCargas());
+
                       Navigator.of(context).pop(nuevaCarga);
                     }
                   },
