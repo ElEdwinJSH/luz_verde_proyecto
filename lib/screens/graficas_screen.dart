@@ -16,7 +16,8 @@ class GraficasCargas extends StatelessWidget {
     final cargas = Provider.of<ListCargaElectricaProvider>(context);
     final List<CargaElectrica> sectors = cargas.items;
     final changeTheme = Provider.of<ChangeTheme>(context);
-
+    final List<Color> colores =
+        List.generate(sectors.length, (int x) => randomColor());
     return Theme(
       data: themeSetter(changeTheme),
       child: Scaffold(
@@ -29,59 +30,27 @@ class GraficasCargas extends StatelessWidget {
             AspectRatio(
                 aspectRatio: 1.0,
                 child: PieChart(PieChartData(
-                  sections: _chartSections(sectors),
+                  sections: _chartSections(sectors, colores),
                   centerSpaceRadius: 48.0,
                 ))),
-            const Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Indicator(
-                  color: AppColors.contentColorBlue,
-                  text: 'First',
-                  isSquare: true,
-                ),
-                SizedBox(
-                  height: 4,
-                ),
-                Indicator(
-                  color: AppColors.contentColorYellow,
-                  text: 'Second',
-                  isSquare: true,
-                ),
-                SizedBox(
-                  height: 4,
-                ),
-                Indicator(
-                  color: AppColors.contentColorPurple,
-                  text: 'Third',
-                  isSquare: true,
-                ),
-                SizedBox(
-                  height: 4,
-                ),
-                Indicator(
-                  color: AppColors.contentColorGreen,
-                  text: 'Fourth',
-                  isSquare: true,
-                ),
-                SizedBox(
-                  height: 18,
-                ),
-              ],
-            ),
+            Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: getList(sectors, colores)),
           ],
         ),
       ),
     );
   }
 
-  List<PieChartSectionData> _chartSections(List<CargaElectrica> sectors) {
+  List<PieChartSectionData> _chartSections(
+      List<CargaElectrica> sectors, colores) {
     final List<PieChartSectionData> list = [];
+    int index = 0;
     for (var sector in sectors) {
       const double radius = 40.0;
       final data = PieChartSectionData(
-        color: randomColor(),
+        color: colores[index],
         value: sector.energiaDia,
         radius: radius,
         title: sector.elemento,
@@ -108,11 +77,32 @@ class GraficasCargas extends StatelessWidget {
                   color: Colors.white),
             ]),
       );
-
+      index++;
       list.add(data);
     }
     return list;
   }
+}
+
+List<Widget> getList(List<CargaElectrica> sectors, colores) {
+  List<Widget> childs = [];
+  int index = 0;
+
+  for (var sector in sectors) {
+    childs.add(Indicator(
+      color: colores[index],
+      text: '${sector.elemento}: ${sector.energiaDia}kWh',
+      isSquare: true,
+    ));
+    childs.add(
+      const SizedBox(
+        height: 4,
+      ),
+    );
+    index++;
+  }
+
+  return childs;
 }
 
 themeSetter(changeTheme) {
