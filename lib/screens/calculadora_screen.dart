@@ -9,6 +9,8 @@ import '../widgets/carga_item.dart';
 import 'package:provider/provider.dart';
 import '../widgets/widgets.dart';
 
+String mesSeleccionado = "Enero";
+
 class CalculadoraScreen extends StatefulWidget {
   const CalculadoraScreen({Key? key}) : super(key: key);
 
@@ -23,7 +25,22 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
     final changeTheme = Provider.of<ChangeTheme>(context);
     double cargaTotal = 0.0;
 
-    // Calcular la carga total
+    final List<String> meses = <String>[
+      'Enero',
+      'Febrero',
+      'Marzo',
+      'Abril',
+      'Mayo',
+      'Junio',
+      'Julio',
+      'Agosto',
+      'Septiembre',
+      'Octubre',
+      'Noviembre',
+      'Diciembre',
+    ];
+    //String mesSeleccionado = "Enero";
+
     for (var carga in cargas.items) {
       cargaTotal += carga.energiaDia;
     }
@@ -33,8 +50,34 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
         child: Scaffold(
           drawer: const NavDrawer(),
           appBar: AppBar(
-            title: Text('Luz Verde'),
-            actions: [],
+            title: const Text('Luz Verde'),
+            actions: [
+              DropdownButton<String>(
+                value: mesSeleccionado,
+                onChanged: (mes) {
+                  setState(() {
+                    mesSeleccionado = mes!;
+                  });
+                },
+                selectedItemBuilder: (BuildContext context) {
+                  return meses.map((String value) {
+                    return Center(
+                      child: Text(
+                        mesSeleccionado,
+                        style: const TextStyle(
+                            color: Colors.white70, fontSize: 16),
+                      ),
+                    );
+                  }).toList();
+                },
+                items: meses.map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              )
+            ],
             //backgroundColor: Colors.green
           ),
           body: Column(
@@ -48,8 +91,8 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
                 ),
               ),
               ListTile(
-                title:
-                    Text('Carga Total: ${cargaTotal.toStringAsFixed(2)} kWh'),
+                title: Text(
+                    'Energia Total: ${cargaTotal.toStringAsFixed(2)} kWh \nEnergia Mensual: ${(cargaTotal * 30).toStringAsFixed(2)} kWh'),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -60,7 +103,7 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
                   onPressed: () {
                     Navigator.of(context).pushNamed('/agregar_dispositivo');
                   },
-                  child: Text('Agregar Dispositivo'),
+                  child: const Text('Agregar Dispositivo'),
                 ),
               ),
             ],
@@ -156,7 +199,7 @@ class NavDrawer extends StatelessWidget {
                 image: AssetImage('assets/images/cover.jpg'),
               ), */
             ),
-            child: Text(
+            child: const Text(
               'Opciones',
               style: TextStyle(
                 color: Colors.white,
