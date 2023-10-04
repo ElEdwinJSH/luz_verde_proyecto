@@ -1,12 +1,9 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:luz_verde_proyecto/providers/change_theme_provider.dart';
 import 'package:luz_verde_proyecto/providers/list_carga_electrica.dart';
-import 'package:luz_verde_proyecto/screens/agregar_dispositivo_screen.dart';
-import 'package:path/path.dart';
 import '../widgets/carga_item.dart';
 import 'package:provider/provider.dart';
+import '../widgets/nav_drawer.dart';
 import '../widgets/widgets.dart';
 
 class CalculadoraScreen extends StatefulWidget {
@@ -33,7 +30,7 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
         child: Scaffold(
           drawer: const NavDrawer(),
           appBar: AppBar(
-            title: Text('Luz Verde'),
+            title: const Text('Luz Verde'),
             actions: [],
             //backgroundColor: Colors.green
           ),
@@ -114,73 +111,5 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
               ),
             ),
           );
-  }
-/*
-  // Función para agregar un dispositivWo
-  void _agregarDispositivo(BuildContext context) async {
-    final result =
-        await Navigator.of(context).pushNamed('/agregar_dispositivo');
-    if (result != null) {
-      setState(() {
-        cargas.add(result as CargaElectrica);
-      });
-    }
-  }
-
-  void _eliminarDispositivo(int index) {
-    setState(() {
-      cargas.removeAt(index);
-    });
-  }
-  */
-}
-
-class NavDrawer extends StatelessWidget {
-  const NavDrawer({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final changeTheme = Provider.of<ChangeTheme>(context);
-
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: changeTheme.isdarktheme
-                  ? Colors.green.shade900
-                  : Colors.green,
-              /*image: DecorationImage(
-                fit: BoxFit.fill,
-                image: AssetImage('assets/images/cover.jpg'),
-              ), */
-            ),
-            child: Text(
-              'Opciones',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 25,
-              ),
-            ),
-          ),
-          ListTile(
-            leading: Icon(changeTheme.isdarktheme
-                ? Icons.wb_sunny
-                : Icons.dark_mode_sharp),
-            title: Text(
-              changeTheme.isdarktheme
-                  ? 'Activar Modo Claro'
-                  : 'Activar Modo Oscuro',
-            ),
-            textColor: changeTheme.isdarktheme ? Colors.white : Colors.black,
-            onTap: () => {
-              changeTheme.isdarktheme = !changeTheme.isdarktheme,
-              themeSetter(changeTheme)
-            },
-          ),
-        ],
-      ),
-    );
   }
 }

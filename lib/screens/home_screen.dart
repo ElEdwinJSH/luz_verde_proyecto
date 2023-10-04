@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:luz_verde_proyecto/screens/graficas_screen.dart';
 import 'package:luz_verde_proyecto/screens/lista_dispositivo_screen.dart';
 import '../screens/calculadora_screen.dart';
 import '../screens/agregar_dispositivo_screen.dart';
@@ -21,6 +22,7 @@ class HomeScreen extends StatelessWidget {
           '/': (context) => const CalculadoraScreen(),
           '/agregar_dispositivo': (context) => const AgregarDispositivoScreen(),
           '/lista_dispositivo': (context) => const ListaDispositivoScreen(),
+          '/graficas': (context) => const GraficasCargas()
         },
       ),
     );
