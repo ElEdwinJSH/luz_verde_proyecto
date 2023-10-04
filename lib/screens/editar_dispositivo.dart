@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:luz_verde_proyecto/providers/list_carga_electrica.dart';
-import '../models/carga.dart';
+import 'package:luz_verde_proyecto/models/carga.dart';
 import 'package:luz_verde_proyecto/models/database.dart';
-import 'package:provider/provider.dart';
 import 'package:luz_verde_proyecto/providers/change_theme_provider.dart';
+import 'package:luz_verde_proyecto/providers/list_carga_electrica.dart';
+import 'package:provider/provider.dart';
 
-class AgregarDispositivoScreen extends StatefulWidget {
-  const AgregarDispositivoScreen({super.key});
+class EditarDispositivos extends StatefulWidget {
+  final CargaElectrica cargaElectrica;
+
+  EditarDispositivos({required this.cargaElectrica});
 
   @override
-  _AgregarDispositivoScreenState createState() =>
-      _AgregarDispositivoScreenState();
+  _EditarDispositivosState createState() => _EditarDispositivosState();
 }
 
-class _AgregarDispositivoScreenState extends State<AgregarDispositivoScreen> {
+class _EditarDispositivosState extends State<EditarDispositivos> {
   final _formKey = GlobalKey<FormState>();
   late TextEditingController _elementoController;
   late TextEditingController _cantidadController;
@@ -23,10 +24,14 @@ class _AgregarDispositivoScreenState extends State<AgregarDispositivoScreen> {
   @override
   void initState() {
     super.initState();
-    _elementoController = TextEditingController();
-    _cantidadController = TextEditingController();
-    _potenciaController = TextEditingController();
-    _horasAlDiaController = TextEditingController();
+    _elementoController =
+        TextEditingController(text: widget.cargaElectrica.elemento);
+    _cantidadController =
+        TextEditingController(text: widget.cargaElectrica.cantidad.toString());
+    _potenciaController =
+        TextEditingController(text: widget.cargaElectrica.potencia.toString());
+    _horasAlDiaController = TextEditingController(
+        text: widget.cargaElectrica.horasAlDia.toString());
   }
 
   @override
@@ -47,8 +52,7 @@ class _AgregarDispositivoScreenState extends State<AgregarDispositivoScreen> {
         data: themeSetter(changeTheme),
         child: Scaffold(
           appBar: AppBar(
-            title: const Text('Agregar Dispositivo'),
-            //backgroundColor: Colors.green,
+            title: const Text('Editar Dispositivo'),
           ),
           body: Form(
             key: _formKey,
@@ -57,7 +61,7 @@ class _AgregarDispositivoScreenState extends State<AgregarDispositivoScreen> {
               children: [
                 TextFormField(
                   controller: _elementoController,
-                  decoration: const InputDecoration(labelText: 'Elemento'),
+                  decoration: InputDecoration(labelText: 'Elemento'),
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Por favor, ingrese un elemento';
@@ -78,8 +82,7 @@ class _AgregarDispositivoScreenState extends State<AgregarDispositivoScreen> {
                 ),
                 TextFormField(
                   controller: _potenciaController,
-                  decoration:
-                      const InputDecoration(labelText: 'Potencia (Watts)'),
+                  decoration: InputDecoration(labelText: 'Potencia (Watts)'),
                   keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -90,7 +93,7 @@ class _AgregarDispositivoScreenState extends State<AgregarDispositivoScreen> {
                 ),
                 TextFormField(
                   controller: _horasAlDiaController,
-                  decoration: const InputDecoration(labelText: 'Horas al día'),
+                  decoration: InputDecoration(labelText: 'Horas al día'),
                   keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -107,27 +110,24 @@ class _AgregarDispositivoScreenState extends State<AgregarDispositivoScreen> {
                       final potencia = int.parse(_potenciaController.text);
                       final horasAlDia =
                           double.parse(_horasAlDiaController.text);
-                      final energiaDia = (potencia * horasAlDia * cantidad) /
-                          1000; // Convertir a kWh
-                      final nuevaCarga = CargaElectrica(
-                        elemento: elemento,
+                      final energiaDia = (potencia * horasAlDia) / 1000;
+
+                      final cargaActualizada = CargaElectrica(
+                        elemento: widget.cargaElectrica.elemento,
                         cantidad: cantidad,
                         potencia: potencia,
                         horasAlDia: horasAlDia,
                         energiaDia: energiaDia,
                       );
-                      final id = await DatabaseHelper.instance
-                          .insertCargas(nuevaCarga);
-                      cargas.addCargas(nuevaCarga);
-                      print(await DatabaseHelper.instance.getCargas());
 
-                      Navigator.of(context).pop(nuevaCarga);
+                      await DatabaseHelper.instance
+                          .updateCargas(cargaActualizada);
+
+                      cargas.updateCargas(cargaActualizada);
+                      Navigator.of(context).pop(cargaActualizada);
                     }
                   },
-                  /*style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.green),
-              ),*/
-                  child: const Text('Guardar'),
+                  child: Text('Guardar Cambios'),
                 ),
               ],
             ),

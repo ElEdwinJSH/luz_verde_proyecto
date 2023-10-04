@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:luz_verde_proyecto/screens/editar_dispositivo.dart';
 import '../models/carga.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
@@ -50,7 +51,15 @@ class CargaItem extends StatelessWidget {
             //cargas.removeCargas(carga)
           ),
           SlidableAction(
-            onPressed: (context) => 1,
+            onPressed: (context) {
+              // Navegar a la pantalla de edición de dispositivos
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) =>
+                      EditarDispositivos(cargaElectrica: carga),
+                ),
+              );
+            },
             backgroundColor: const Color(0xFF21B7CA),
             foregroundColor: Colors.white,
             icon: Icons.edit,
