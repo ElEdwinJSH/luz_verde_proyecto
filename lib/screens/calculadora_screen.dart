@@ -3,6 +3,8 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:luz_verde_proyecto/providers/change_theme_provider.dart';
 import 'package:luz_verde_proyecto/providers/list_carga_electrica.dart';
+import 'package:luz_verde_proyecto/screens/agregar_dispositivo_screen.dart';
+import 'package:path/path.dart';
 import '../widgets/carga_item.dart';
 import 'package:provider/provider.dart';
 import '../widgets/widgets.dart';
@@ -32,16 +34,7 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
           drawer: const NavDrawer(),
           appBar: AppBar(
             title: Text('Luz Verde'),
-            actions: [
-              IconButton(
-                icon: const Icon(Icons.dark_mode),
-                tooltip: 'Open shopping cart',
-                onPressed: () {
-                  changeTheme.isdarktheme = !changeTheme.isdarktheme;
-                  themeSetter(changeTheme);
-                },
-              )
-            ],
+            actions: [],
             //backgroundColor: Colors.green
           ),
           body: Column(
@@ -85,7 +78,7 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
               seedColor: Colors.white,
               brightness: Brightness.dark,
             ),
-            drawerTheme: DrawerThemeData(backgroundColor: Colors.white),
+            drawerTheme: DrawerThemeData(backgroundColor: Colors.black54),
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ButtonStyle(
                 backgroundColor:
@@ -104,7 +97,7 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
                   color: Colors.white,
                   fontSize: 22,
                 )),
-            drawerTheme: const DrawerThemeData(backgroundColor: Colors.white),
+            drawerTheme: DrawerThemeData(backgroundColor: Colors.white),
             iconButtonTheme: const IconButtonThemeData(
                 style: ButtonStyle(
                     iconColor: MaterialStatePropertyAll(Colors.white))),
@@ -148,21 +141,22 @@ class NavDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final changeTheme = Provider.of<ChangeTheme>(context);
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
             decoration: BoxDecoration(
-                color: changeTheme.isdarktheme
-                    ? Colors.green.shade900
-                    : Colors.green
-                /*image: DecorationImage(
+              color: changeTheme.isdarktheme
+                  ? Colors.green.shade900
+                  : Colors.green,
+              /*image: DecorationImage(
                 fit: BoxFit.fill,
                 image: AssetImage('assets/images/cover.jpg'),
               ), */
-                ),
-            child: const Text(
+            ),
+            child: Text(
               'Opciones',
               style: TextStyle(
                 color: Colors.white,
@@ -171,9 +165,19 @@ class NavDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.dark_mode_sharp),
-            title: Text('Modo oscuro'),
-            onTap: () => {},
+            leading: Icon(changeTheme.isdarktheme
+                ? Icons.wb_sunny
+                : Icons.dark_mode_sharp),
+            title: Text(
+              changeTheme.isdarktheme
+                  ? 'Activar Modo Claro'
+                  : 'Activar Modo Oscuro',
+            ),
+            textColor: changeTheme.isdarktheme ? Colors.white : Colors.black,
+            onTap: () => {
+              changeTheme.isdarktheme = !changeTheme.isdarktheme,
+              themeSetter(changeTheme)
+            },
           ),
         ],
       ),
