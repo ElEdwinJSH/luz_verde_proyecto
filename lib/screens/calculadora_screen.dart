@@ -167,11 +167,15 @@ class NavDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.dark_mode_sharp),
-            title: Text('Modo oscuro'),
-            onTap: () {
-              changeTheme.isdarktheme = !changeTheme.isdarktheme;
-              themeSetter(changeTheme);
+            leading: Icon(changeTheme.isdarktheme
+                ? Icons.wb_sunny
+                : Icons.dark_mode_sharp),
+            title: Text(changeTheme.isdarktheme
+                ? 'Activar Modo Claro'
+                : 'Activar Modo Oscuro'),
+            onTap: () => {
+              changeTheme.isdarktheme = !changeTheme.isdarktheme,
+              themeSetter(changeTheme)
             },
           ),
         ],
