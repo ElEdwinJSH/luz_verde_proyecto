@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:luz_verde_proyecto/providers/change_theme_provider.dart';
 import 'package:luz_verde_proyecto/providers/list_carga_electrica.dart';
+import 'package:luz_verde_proyecto/screens/agregar_dispositivo_screen.dart';
 import '../widgets/carga_item.dart';
 import 'package:provider/provider.dart';
 import '../widgets/widgets.dart';
@@ -143,6 +144,8 @@ class NavDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final changeTheme = Provider.of<ChangeTheme>(context);
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -166,7 +169,10 @@ class NavDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.dark_mode_sharp),
             title: Text('Modo oscuro'),
-            onTap: () => {},
+            onTap: () {
+              changeTheme.isdarktheme = !changeTheme.isdarktheme;
+              themeSetter(changeTheme);
+            },
           ),
         ],
       ),
