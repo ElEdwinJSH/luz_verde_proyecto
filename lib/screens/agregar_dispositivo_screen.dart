@@ -155,7 +155,15 @@ themeSetter(changeTheme) {
         )
       : ThemeData(
           useMaterial3: true,
-          appBarTheme: AppBarTheme(backgroundColor: Colors.green),
+          appBarTheme: const AppBarTheme(
+              backgroundColor: Colors.green,
+              titleTextStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 22,
+              )),
+          iconButtonTheme: const IconButtonThemeData(
+              style: ButtonStyle(
+                  iconColor: MaterialStatePropertyAll(Colors.white))),
           colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.white,
             brightness: Brightness.light,

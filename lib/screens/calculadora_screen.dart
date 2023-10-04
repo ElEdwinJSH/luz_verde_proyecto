@@ -95,7 +95,15 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
           )
         : ThemeData(
             useMaterial3: true,
-            appBarTheme: AppBarTheme(backgroundColor: Colors.green),
+            appBarTheme: const AppBarTheme(
+                backgroundColor: Colors.green,
+                titleTextStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                )),
+            iconButtonTheme: const IconButtonThemeData(
+                style: ButtonStyle(
+                    iconColor: MaterialStatePropertyAll(Colors.white))),
             colorScheme: ColorScheme.fromSeed(
               seedColor: Colors.white,
               brightness: Brightness.light,
@@ -111,7 +119,7 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
           );
   }
 /*
-  // Función para agregar un dispositivo
+  // Función para agregar un dispositivWo
   void _agregarDispositivo(BuildContext context) async {
     final result =
         await Navigator.of(context).pushNamed('/agregar_dispositivo');
@@ -128,4 +136,40 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
     });
   }
   */
+}
+
+class NavDrawer extends StatelessWidget {
+  const NavDrawer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          const DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.green,
+              /*image: DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage('assets/images/cover.jpg'),
+              ), */
+            ),
+            child: Text(
+              'Opciones',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 25,
+              ),
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.dark_mode_sharp),
+            title: Text('Modo oscuro'),
+            onTap: () => {},
+          ),
+        ],
+      ),
+    );
+  }
 }
