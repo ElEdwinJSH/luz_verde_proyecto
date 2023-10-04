@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:luz_verde_proyecto/models/carga.dart';
 import 'package:luz_verde_proyecto/providers/change_theme_provider.dart';
 import 'package:luz_verde_proyecto/providers/list_carga_electrica.dart';
-import 'package:luz_verde_proyecto/widgets/app_colors.dart';
 import 'package:luz_verde_proyecto/widgets/indicators.dart';
 import 'package:luz_verde_proyecto/widgets/random_colors.dart';
 import 'package:provider/provider.dart';
@@ -46,6 +45,12 @@ class GraficasCargas extends StatelessWidget {
   List<PieChartSectionData> _chartSections(
       List<CargaElectrica> sectors, colores) {
     final List<PieChartSectionData> list = [];
+
+    double max = 0;
+    for (var element in sectors) {
+      max += element.energiaDia;
+    }
+
     int index = 0;
     for (var sector in sectors) {
       const double radius = 40.0;
@@ -53,9 +58,9 @@ class GraficasCargas extends StatelessWidget {
         color: colores[index],
         value: sector.energiaDia,
         radius: radius,
-        title: sector.elemento,
+        title: '${(sector.energiaDia / max * 100).toStringAsFixed(2)}%',
         titleStyle: const TextStyle(
-            fontSize: 25,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
             color: Colors.black,
             shadows: [
