@@ -16,7 +16,7 @@ class CargaItem extends StatelessWidget {
     return Slidable(
       startActionPane: ActionPane(
         // A motion is a widget used to control how the pane animates.
-        motion: const ScrollMotion(),
+        motion: const BehindMotion(),
 
         // A pane can dismiss the Slidable.
 
