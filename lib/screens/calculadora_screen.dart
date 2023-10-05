@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:luz_verde_proyecto/providers/change_theme_provider.dart';
 import 'package:luz_verde_proyecto/providers/list_carga_electrica.dart';
 
@@ -125,6 +126,9 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
       mensajeConsumo = "Basico";
     }
 
+    double costoUnitario =
+        double.parse(lista[mensajeConsumo][mesSeleccionado]!);
+    ;
     double costoDiario =
         cargaDiaria * double.parse(lista[mensajeConsumo][mesSeleccionado]!);
     double costoMensual =
@@ -138,6 +142,12 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
           appBar: AppBar(
             title: Text("Luz Verde"),
             actions: [
+              Text("\$/kWh $costoUnitario  ",
+                  style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      color: changeTheme.isdarktheme
+                          ? Colors.white70
+                          : Colors.white)),
               DropdownButton<String>(
                   value: mesSeleccionado,
                   onChanged: (mes) {
@@ -150,8 +160,12 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
                       return Center(
                         child: Text(
                           mesSeleccionado,
-                          style: const TextStyle(
-                              color: Colors.white70, fontSize: 16),
+                          style: TextStyle(
+                              fontStyle: FontStyle.italic,
+                              color: changeTheme.isdarktheme
+                                  ? Colors.white70
+                                  : Colors.white,
+                              fontSize: 16),
                         ),
                       );
                     }).toList();
@@ -264,7 +278,13 @@ themeSetter(changeTheme) {
   return changeTheme.isdarktheme
       ? ThemeData(
           useMaterial3: true,
-          appBarTheme: AppBarTheme(backgroundColor: Colors.green.shade900),
+          appBarTheme: AppBarTheme(
+            backgroundColor: Colors.green.shade900,
+            systemOverlayStyle: SystemUiOverlayStyle(
+              systemNavigationBarColor: Colors.grey.shade900, // Navigation bar
+              statusBarColor: Colors.green.shade900, // Status bar
+            ),
+          ),
           colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.white,
             brightness: Brightness.dark,
@@ -282,8 +302,13 @@ themeSetter(changeTheme) {
         )
       : ThemeData(
           useMaterial3: true,
-          appBarTheme: const AppBarTheme(
+          appBarTheme: AppBarTheme(
               backgroundColor: Color.fromARGB(255, 64, 167, 67),
+              systemOverlayStyle: SystemUiOverlayStyle(
+                systemNavigationBarColor:
+                    Colors.grey.shade200, // Navigation bar
+                statusBarColor: Color.fromARGB(255, 64, 167, 67), // Status bar
+              ),
               titleTextStyle: TextStyle(
                 color: Colors.white,
                 fontSize: 22,

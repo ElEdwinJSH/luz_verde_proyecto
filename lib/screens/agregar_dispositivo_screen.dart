@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:luz_verde_proyecto/providers/list_carga_electrica.dart';
 import 'package:provider/provider.dart';
@@ -149,18 +150,23 @@ class _AgregarDispositivoScreenState extends State<AgregarDispositivoScreen> {
   }
 }
 
-//cambia el tema
 themeSetter(changeTheme) {
   return changeTheme.isdarktheme
       ? ThemeData(
           useMaterial3: true,
-          appBarTheme: AppBarTheme(backgroundColor: Colors.green.shade900),
+          appBarTheme: AppBarTheme(
+            backgroundColor: Colors.green.shade900,
+            systemOverlayStyle: SystemUiOverlayStyle(
+              systemNavigationBarColor: Colors.grey.shade900, // Navigation bar
+              statusBarColor: Colors.green.shade900, // Status bar
+            ),
+          ),
           colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.white,
             brightness: Brightness.dark,
             background: Colors.grey.shade900,
-            primary: Colors.blue.shade300,
           ),
+          drawerTheme: DrawerThemeData(backgroundColor: Colors.grey.shade900),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(Colors.green.shade900),
@@ -172,8 +178,13 @@ themeSetter(changeTheme) {
         )
       : ThemeData(
           useMaterial3: true,
-          appBarTheme: const AppBarTheme(
+          appBarTheme: AppBarTheme(
               backgroundColor: Color.fromARGB(255, 64, 167, 67),
+              systemOverlayStyle: SystemUiOverlayStyle(
+                systemNavigationBarColor:
+                    Colors.grey.shade200, // Navigation bar
+                statusBarColor: Color.fromARGB(255, 64, 167, 67), // Status bar
+              ),
               titleTextStyle: TextStyle(
                 color: Colors.white,
                 fontSize: 22,
@@ -186,6 +197,7 @@ themeSetter(changeTheme) {
             brightness: Brightness.light,
             background: Colors.grey.shade200,
           ),
+          drawerTheme: DrawerThemeData(backgroundColor: Colors.grey.shade200),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
               backgroundColor:

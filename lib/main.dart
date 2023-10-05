@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:luz_verde_proyecto/widgets/splash_screen.dart';
 import 'providers/change_theme_provider.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +46,6 @@ class MyApp extends StatelessWidget {
                 )
               : ThemeData(
                   useMaterial3: true,
-                  appBarTheme: AppBarTheme(backgroundColor: Colors.green),
                   colorScheme: ColorScheme.fromSeed(
                     seedColor: Colors.white,
                     brightness: Brightness.light,

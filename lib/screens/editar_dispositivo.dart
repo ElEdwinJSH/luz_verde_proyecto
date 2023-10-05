@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:luz_verde_proyecto/models/carga.dart';
 import 'package:luz_verde_proyecto/models/database.dart';
 import 'package:luz_verde_proyecto/providers/change_theme_provider.dart';
@@ -150,17 +151,23 @@ class _EditarDispositivosState extends State<EditarDispositivos> {
   }
 }
 
-//cambia el tema
 themeSetter(changeTheme) {
   return changeTheme.isdarktheme
       ? ThemeData(
           useMaterial3: true,
-          appBarTheme: AppBarTheme(backgroundColor: Colors.green.shade900),
+          appBarTheme: AppBarTheme(
+            backgroundColor: Colors.green.shade900,
+            systemOverlayStyle: SystemUiOverlayStyle(
+              systemNavigationBarColor: Colors.grey.shade900, // Navigation bar
+              statusBarColor: Colors.green.shade900, // Status bar
+            ),
+          ),
           colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.white,
             brightness: Brightness.dark,
             background: Colors.grey.shade900,
           ),
+          drawerTheme: DrawerThemeData(backgroundColor: Colors.grey.shade900),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(Colors.green.shade900),
@@ -172,8 +179,13 @@ themeSetter(changeTheme) {
         )
       : ThemeData(
           useMaterial3: true,
-          appBarTheme: const AppBarTheme(
+          appBarTheme: AppBarTheme(
               backgroundColor: Color.fromARGB(255, 64, 167, 67),
+              systemOverlayStyle: SystemUiOverlayStyle(
+                systemNavigationBarColor:
+                    Colors.grey.shade200, // Navigation bar
+                statusBarColor: Color.fromARGB(255, 64, 167, 67), // Status bar
+              ),
               titleTextStyle: TextStyle(
                 color: Colors.white,
                 fontSize: 22,
@@ -186,10 +198,11 @@ themeSetter(changeTheme) {
             brightness: Brightness.light,
             background: Colors.grey.shade200,
           ),
+          drawerTheme: DrawerThemeData(backgroundColor: Colors.grey.shade200),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(
-                  const Color.fromARGB(255, 64, 167, 67)),
+              backgroundColor:
+                  MaterialStateProperty.all(Color.fromARGB(255, 64, 167, 67)),
               foregroundColor: MaterialStateProperty.all(
                 const Color.fromARGB(228, 241, 241, 241),
               ),

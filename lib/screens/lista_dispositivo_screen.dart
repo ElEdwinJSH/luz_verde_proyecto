@@ -13,7 +13,7 @@ class _ListaDispositivoScreenState extends State<ListaDispositivoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lista de dispositivos'),
+        title: const Text('Lista de dispositivos'),
         backgroundColor: Colors.green,
       ),
       body: FutureBuilder<List<Map<String, dynamic>>>(
