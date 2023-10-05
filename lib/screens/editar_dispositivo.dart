@@ -66,6 +66,7 @@ class _EditarDispositivosState extends State<EditarDispositivos> {
                     if (value!.isEmpty) {
                       return 'Por favor, ingrese un elemento';
                     }
+
                     return null;
                   },
                 ),
@@ -76,6 +77,9 @@ class _EditarDispositivosState extends State<EditarDispositivos> {
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Por favor, ingrese la cantidad';
+                    }
+                    if (double.parse(value) < 0) {
+                      return 'Por favor, solo ingrese valores positivos';
                     }
                     return null;
                   },
@@ -89,6 +93,9 @@ class _EditarDispositivosState extends State<EditarDispositivos> {
                     if (value!.isEmpty) {
                       return 'Por favor, ingrese la potencia';
                     }
+                    if (double.parse(value) < 0) {
+                      return 'Por favor, solo ingrese valores positivos';
+                    }
                     return null;
                   },
                 ),
@@ -99,6 +106,12 @@ class _EditarDispositivosState extends State<EditarDispositivos> {
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Por favor, ingrese las horas al día';
+                    }
+                    if (double.parse(value) < 0) {
+                      return 'Por favor, solo ingrese valores positivos';
+                    }
+                    if (double.parse(value) > 24) {
+                      return 'Por favor, solo ingrese 24 horas o menos';
                     }
                     return null;
                   },
