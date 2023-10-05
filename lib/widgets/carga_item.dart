@@ -14,6 +14,7 @@ class CargaItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cargas = Provider.of<ListCargaElectricaProvider>(context);
+
     final changeTheme = Provider.of<ChangeTheme>(context);
 
     return Slidable(

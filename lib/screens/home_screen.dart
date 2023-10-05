@@ -5,6 +5,7 @@ import '../models/carga.dart';
 import '../widgets/carga_item.dart';
 import 'package:luz_verde_proyecto/models/theme_preferences.dart';
 import 'package:flutter/material.dart';
+
 import 'package:luz_verde_proyecto/screens/graficas_screen.dart';
 import 'package:luz_verde_proyecto/screens/lista_dispositivo_screen.dart';
 
