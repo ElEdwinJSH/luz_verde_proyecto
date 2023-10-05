@@ -20,7 +20,7 @@ class NavDrawer extends StatelessWidget {
             decoration: BoxDecoration(
               color: changeTheme.isdarktheme
                   ? Colors.green.shade900
-                  : Colors.green,
+                  : Colors.green.shade700,
               /*image: DecorationImage(
                 fit: BoxFit.fill,
                 image: AssetImage('assets/images/cover.jpg'),

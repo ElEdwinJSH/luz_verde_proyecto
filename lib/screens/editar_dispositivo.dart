@@ -146,6 +146,7 @@ themeSetter(changeTheme) {
           colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.white,
             brightness: Brightness.dark,
+            background: Colors.grey.shade900,
           ),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
@@ -159,7 +160,7 @@ themeSetter(changeTheme) {
       : ThemeData(
           useMaterial3: true,
           appBarTheme: const AppBarTheme(
-              backgroundColor: Colors.green,
+              backgroundColor: Color.fromARGB(255, 64, 167, 67),
               titleTextStyle: TextStyle(
                 color: Colors.white,
                 fontSize: 22,
@@ -170,10 +171,12 @@ themeSetter(changeTheme) {
           colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.white,
             brightness: Brightness.light,
+            background: Colors.grey.shade200,
           ),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.green),
+              backgroundColor: MaterialStateProperty.all(
+                  const Color.fromARGB(255, 64, 167, 67)),
               foregroundColor: MaterialStateProperty.all(
                 const Color.fromARGB(228, 241, 241, 241),
               ),

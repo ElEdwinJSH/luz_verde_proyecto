@@ -32,10 +32,16 @@ class GraficasCargas extends StatelessWidget {
                   sections: _chartSections(sectors, colores),
                   centerSpaceRadius: 48.0,
                 ))),
-            Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: getList(sectors, colores)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Spacer(flex: 1), // Agrega un Spacer al principio
+                ...getList(sectors, colores),
+                Spacer(flex: 12), // Tus elementos
+                // Agrega otro Spacer al final
+              ],
+            ),
           ],
         ),
       ),
@@ -118,6 +124,7 @@ themeSetter(changeTheme) {
           colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.white,
             brightness: Brightness.dark,
+            background: Colors.grey.shade900,
           ),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
@@ -131,7 +138,7 @@ themeSetter(changeTheme) {
       : ThemeData(
           useMaterial3: true,
           appBarTheme: const AppBarTheme(
-              backgroundColor: Colors.green,
+              backgroundColor: Color.fromARGB(255, 64, 167, 67),
               titleTextStyle: TextStyle(
                 color: Colors.white,
                 fontSize: 22,
@@ -142,6 +149,7 @@ themeSetter(changeTheme) {
           colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.white,
             brightness: Brightness.light,
+            background: Colors.grey.shade200,
           ),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(

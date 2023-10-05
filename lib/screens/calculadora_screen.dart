@@ -201,13 +201,21 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
                     DataCell(Text('\$ ${costoMensual.toStringAsFixed(2)}')),
                   ]),
                   DataRow(
-                    color: MaterialStateProperty.all(
-                      (tarifaStatus == 1)
-                          ? Colors.green
-                          : (tarifaStatus) == 2
-                              ? Colors.deepOrange
-                              : Colors.red,
-                    ),
+                    color: changeTheme.isdarktheme
+                        ? MaterialStateProperty.all(
+                            (tarifaStatus == 1)
+                                ? Colors.green.shade600
+                                : (tarifaStatus) == 2
+                                    ? Colors.deepOrange.shade700
+                                    : Colors.red.shade700,
+                          )
+                        : MaterialStateProperty.all(
+                            (tarifaStatus == 1)
+                                ? Colors.green
+                                : (tarifaStatus) == 2
+                                    ? Colors.deepOrange
+                                    : Colors.red,
+                          ),
 
                     //for data row color
                     cells: <DataCell>[
@@ -260,7 +268,9 @@ themeSetter(changeTheme) {
           colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.white,
             brightness: Brightness.dark,
+            background: Colors.grey.shade900,
           ),
+          drawerTheme: DrawerThemeData(backgroundColor: Colors.grey.shade900),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(Colors.green.shade900),
@@ -273,7 +283,7 @@ themeSetter(changeTheme) {
       : ThemeData(
           useMaterial3: true,
           appBarTheme: const AppBarTheme(
-              backgroundColor: Colors.green,
+              backgroundColor: Color.fromARGB(255, 64, 167, 67),
               titleTextStyle: TextStyle(
                 color: Colors.white,
                 fontSize: 22,
@@ -284,10 +294,13 @@ themeSetter(changeTheme) {
           colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.white,
             brightness: Brightness.light,
+            background: Colors.grey.shade200,
           ),
+          drawerTheme: DrawerThemeData(backgroundColor: Colors.grey.shade200),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.green),
+              backgroundColor:
+                  MaterialStateProperty.all(Color.fromARGB(255, 64, 167, 67)),
               foregroundColor: MaterialStateProperty.all(
                 const Color.fromARGB(228, 241, 241, 241),
               ),
