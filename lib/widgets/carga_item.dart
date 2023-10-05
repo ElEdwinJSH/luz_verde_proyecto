@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:luz_verde_proyecto/screens/editar_dispositivo.dart';
 import '../models/carga.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:provider/provider.dart';
+ import 'package:provider/provider.dart';
 import 'package:luz_verde_proyecto/providers/list_carga_electrica.dart';
+ 
 
 class CargaItem extends StatelessWidget {
   final CargaElectrica carga;
@@ -11,8 +13,9 @@ class CargaItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cargas = Provider.of<ListCargaElectricaProvider>(context);
+     final cargas = Provider.of<ListCargaElectricaProvider>(context);
 
+ 
     return Slidable(
       startActionPane: ActionPane(
         // A motion is a widget used to control how the pane animates.
@@ -50,7 +53,15 @@ class CargaItem extends StatelessWidget {
             //cargas.removeCargas(carga)
           ),
           SlidableAction(
-            onPressed: (context) => 1,
+            onPressed: (context) {
+              // Navegar a la pantalla de edición de dispositivos
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) =>
+                      EditarDispositivos(cargaElectrica: carga),
+                ),
+              );
+            },
             backgroundColor: const Color(0xFF21B7CA),
             foregroundColor: Colors.white,
             icon: Icons.edit,
@@ -59,10 +70,24 @@ class CargaItem extends StatelessWidget {
         ],
       ),
       child: ListTile(
-        title: Text(carga.elemento),
-        subtitle: Text('Cantidad: ${carga.cantidad}'),
-        trailing:
-            Text('Energía/día: ${carga.energiaDia.toStringAsFixed(2)} kWh'),
+        title: Text(
+          carga.elemento,
+          style: TextStyle(
+            color: currentTheme.isDarkTheme() ? Colors.white : Colors.black,
+          ),
+        ),
+        subtitle: Text(
+          'Cantidad: ${carga.cantidad}',
+          style: TextStyle(
+            color: currentTheme.isDarkTheme() ? Colors.white : Colors.black,
+          ),
+        ),
+        trailing: Text(
+          'Energía/día: ${carga.energiaDia.toStringAsFixed(2)} kWh',
+          style: TextStyle(
+            color: currentTheme.isDarkTheme() ? Colors.white : Colors.black,
+          ),
+        ),
       ),
     );
   }
