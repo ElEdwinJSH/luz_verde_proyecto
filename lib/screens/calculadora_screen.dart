@@ -4,13 +4,14 @@ import 'package:luz_verde_proyecto/providers/change_theme_provider.dart';
 import 'package:luz_verde_proyecto/providers/list_carga_electrica.dart';
 import 'package:luz_verde_proyecto/screens/agregar_dispositivo_screen.dart';
 
+
 import '../widgets/carga_item.dart';
 
 import 'package:provider/provider.dart';
+import '../widgets/nav_drawer.dart';
 import '../widgets/widgets.dart';
-
-import 'package:provider/provider.dart';
 import 'package:luz_verde_proyecto/providers/theme.dart';
+import 'package:provider/provider.dart';
 
 String mesSeleccionado = "Enero";
 
@@ -81,6 +82,7 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
   }
 }
 ''');
+
 
     final List<String> meses = <String>[
       'Enero',
@@ -163,6 +165,7 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),
+
                     );
                   }).toList()),
             ],
@@ -255,54 +258,48 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
   }
 }
 
-class NavDrawer extends StatelessWidget {
-  const NavDrawer({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final changeTheme = Provider.of<ChangeTheme>(context);
-
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
-          DrawerHeader(
-            decoration: BoxDecoration(
-              color: changeTheme.isdarktheme
-                  ? Colors.green.shade900
-                  : Colors.green,
-              /*image: DecorationImage(
-                fit: BoxFit.fill,
-                image: AssetImage('assets/images/cover.jpg'),
-              ), */
-            ),
-            child: const Text(
-              'Opciones',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 25,
+themeSetter(changeTheme) {
+  return changeTheme.isdarktheme
+      ? ThemeData(
+          useMaterial3: true,
+          appBarTheme: AppBarTheme(backgroundColor: Colors.green.shade900),
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.white,
+            brightness: Brightness.dark,
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.green.shade900),
+              foregroundColor: MaterialStateProperty.all(
+                const Color.fromARGB(228, 241, 241, 241),
               ),
             ),
           ),
-          ListTile(
-            leading: Icon(changeTheme.isdarktheme
-                ? Icons.wb_sunny
-                : Icons.dark_mode_sharp),
-            title: Text(
-              changeTheme.isdarktheme
-                  ? 'Activar Modo Claro'
-                  : 'Activar Modo Oscuro',
-            ),
-            textColor: changeTheme.isdarktheme ? Colors.white : Colors.black,
-            onTap: () => {
-              changeTheme.isdarktheme = !changeTheme.isdarktheme,
-              themeSetter(changeTheme)
-            },
+        )
+      : ThemeData(
+          useMaterial3: true,
+          appBarTheme: const AppBarTheme(
+              backgroundColor: Colors.green,
+              titleTextStyle: TextStyle(
+                color: Colors.white,
+                fontSize: 22,
+              )),
+          iconButtonTheme: const IconButtonThemeData(
+              style: ButtonStyle(
+                  iconColor: MaterialStatePropertyAll(Colors.white))),
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.white,
+            brightness: Brightness.light,
           ),
-        ],
-      ),
-    );
-  }
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.green),
+              foregroundColor: MaterialStateProperty.all(
+                const Color.fromARGB(228, 241, 241, 241),
+              ),
+            ),
+          ),
+        );
 }
 
 //cambia el tema
