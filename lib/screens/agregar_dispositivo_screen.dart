@@ -107,8 +107,8 @@ class _AgregarDispositivoScreenState extends State<AgregarDispositivoScreen> {
                       final potencia = int.parse(_potenciaController.text);
                       final horasAlDia =
                           double.parse(_horasAlDiaController.text);
-                      final energiaDia =
-                          (potencia * horasAlDia) / 1000; // Convertir a kWh
+                      final energiaDia = (potencia * horasAlDia * cantidad) /
+                          1000; // Convertir a kWh
                       final nuevaCarga = CargaElectrica(
                         elemento: elemento,
                         cantidad: cantidad,
