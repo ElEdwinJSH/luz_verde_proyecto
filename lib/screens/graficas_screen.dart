@@ -36,15 +36,10 @@ class GraficasCargas extends StatelessWidget {
                   sections: _chartSections(sectors, colores),
                   centerSpaceRadius: 48.0,
                 ))),
-            Row(
+            Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Spacer(flex: 1), // Agrega un Spacer al principio
-                ...getList(sectors, colores),
-                Spacer(flex: 12), // Tus elementos
-                // Agrega otro Spacer al final
-              ],
+              children: getList(sectors, colores),
             ),
           ],
         ),
