@@ -6,11 +6,14 @@ import 'package:luz_verde_proyecto/providers/list_carga_electrica.dart';
 import 'package:luz_verde_proyecto/screens/agregar_dispositivo_screen.dart';
 import 'package:path/path.dart';
 import '../widgets/carga_item.dart';
+ 
 import 'package:provider/provider.dart';
 import '../widgets/widgets.dart';
 
 String mesSeleccionado = "Enero";
-
+ import 'package:luz_verde_proyecto/providers/theme.dart';
+import 'package:provider/provider.dart';
+ 
 class CalculadoraScreen extends StatefulWidget {
   const CalculadoraScreen({Key? key}) : super(key: key);
 
@@ -21,8 +24,10 @@ class CalculadoraScreen extends StatefulWidget {
 class _CalculadoraScreenState extends State<CalculadoraScreen> {
   @override
   Widget build(BuildContext context) {
+ 
     final cargas = Provider.of<ListCargaElectricaProvider>(context);
     final changeTheme = Provider.of<ChangeTheme>(context);
+ 
     double cargaTotal = 0.0;
 
     final List<String> meses = <String>[
@@ -45,6 +50,7 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
       cargaTotal += carga.energiaDia;
     }
 
+ 
     return Theme(
         data: themeSetter(changeTheme),
         child: Scaffold(
@@ -66,6 +72,7 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
                         mesSeleccionado,
                         style: const TextStyle(
                             color: Colors.white70, fontSize: 16),
+ 
                       ),
                     );
                   }).toList();

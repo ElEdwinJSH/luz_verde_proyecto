@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+ 
 import 'package:luz_verde_proyecto/providers/list_carga_electrica.dart';
-import '../models/carga.dart';
+ import 'package:luz_verde_proyecto/providers/theme.dart';
+import 'package:provider/provider.dart';
+ import '../models/carga.dart';
 import 'package:luz_verde_proyecto/models/database.dart';
 import 'package:provider/provider.dart';
 import 'package:luz_verde_proyecto/providers/change_theme_provider.dart';
@@ -40,6 +43,7 @@ class _AgregarDispositivoScreenState extends State<AgregarDispositivoScreen> {
 
   @override
   Widget build(BuildContext context) {
+ 
     final cargas = Provider.of<ListCargaElectricaProvider>(context);
     final changeTheme = Provider.of<ChangeTheme>(context);
 
@@ -175,6 +179,8 @@ themeSetter(changeTheme) {
               backgroundColor: MaterialStateProperty.all(Colors.green),
               foregroundColor: MaterialStateProperty.all(
                 const Color.fromARGB(228, 241, 241, 241),
+ 
+ 
               ),
             ),
           ),
