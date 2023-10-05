@@ -47,7 +47,9 @@ class CargaItem extends StatelessWidget {
               ),
             ),
 
-            backgroundColor: const Color(0xFFFE4A49),
+            backgroundColor: changeTheme.isdarktheme
+                ? Color.fromARGB(255, 198, 45, 45)
+                : Color.fromARGB(255, 225, 61, 61),
             foregroundColor: Colors.white,
             icon: Icons.delete,
             label: 'Eliminar',
@@ -63,7 +65,9 @@ class CargaItem extends StatelessWidget {
                 ),
               );
             },
-            backgroundColor: const Color(0xFF21B7CA),
+            backgroundColor: changeTheme.isdarktheme
+                ? Color.fromARGB(255, 16, 136, 152)
+                : Color.fromARGB(255, 23, 162, 180),
             foregroundColor: Colors.white,
             icon: Icons.edit,
             label: 'Editar',

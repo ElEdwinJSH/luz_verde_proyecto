@@ -7,7 +7,11 @@ import 'providers/change_theme_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(const MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -36,8 +40,8 @@ class MyApp extends StatelessWidget {
                   ),
                   elevatedButtonTheme: ElevatedButtonThemeData(
                     style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.green.shade900),
+                      backgroundColor: MaterialStateProperty.all(
+                          const Color.fromARGB(255, 165, 186, 166)),
                       foregroundColor: MaterialStateProperty.all(
                         const Color.fromARGB(228, 241, 241, 241),
                       ),

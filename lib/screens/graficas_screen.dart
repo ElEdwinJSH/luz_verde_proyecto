@@ -22,7 +22,10 @@ class GraficasCargas extends StatelessWidget {
       data: themeSetter(changeTheme),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Gráficas'),
+          title: const Text(
+            'Gráficas',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
           //backgroundColor: Colors.green
         ),
         body: Column(
@@ -146,13 +149,13 @@ themeSetter(changeTheme) {
       : ThemeData(
           useMaterial3: true,
           appBarTheme: AppBarTheme(
-              backgroundColor: Color.fromARGB(255, 64, 167, 67),
+              backgroundColor: Color.fromARGB(255, 57, 143, 60),
               systemOverlayStyle: SystemUiOverlayStyle(
                 systemNavigationBarColor:
-                    Colors.grey.shade200, // Navigation bar
-                statusBarColor: Color.fromARGB(255, 64, 167, 67), // Status bar
+                    Colors.grey.shade300, // Navigation bar
+                statusBarColor: Color.fromARGB(255, 57, 143, 60), // Status bar
               ),
-              titleTextStyle: TextStyle(
+              titleTextStyle: const TextStyle(
                 color: Colors.white,
                 fontSize: 22,
               )),
@@ -162,7 +165,7 @@ themeSetter(changeTheme) {
           colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.white,
             brightness: Brightness.light,
-            background: Colors.grey.shade200,
+            background: Colors.grey.shade300,
           ),
           drawerTheme: DrawerThemeData(backgroundColor: Colors.grey.shade200),
           elevatedButtonTheme: ElevatedButtonThemeData(

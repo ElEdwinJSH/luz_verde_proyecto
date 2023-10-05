@@ -140,7 +140,10 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
         child: Scaffold(
           drawer: const NavDrawer(),
           appBar: AppBar(
-            title: Text("Luz Verde"),
+            title: const Text(
+              "Luz Verde",
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
             actions: [
               Text("\$/kWh $costoUnitario  ",
                   style: TextStyle(
@@ -199,19 +202,19 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
                 ],
                 rows: [
                   DataRow(cells: [
-                    DataCell(Text('Consumo Electrico Diario')),
+                    const DataCell(Text('Consumo Electrico Diario')),
                     DataCell(Text('${cargaDiaria.toStringAsFixed(2)} kWh')),
                   ]),
                   DataRow(cells: [
-                    DataCell(Text('Consumo Electrico Mensual')),
+                    const DataCell(Text('Consumo Electrico Mensual')),
                     DataCell(Text('${cargaMensual.toStringAsFixed(2)} kWh')),
                   ]),
                   DataRow(cells: [
-                    DataCell(Text('Costo Diario')),
+                    const DataCell(Text('Costo Diario')),
                     DataCell(Text('\$ ${costoDiario.toStringAsFixed(2)}')),
                   ]),
                   DataRow(cells: [
-                    DataCell(Text('Costo Mensual')),
+                    const DataCell(Text('Costo Mensual')),
                     DataCell(Text('\$ ${costoMensual.toStringAsFixed(2)}')),
                   ]),
                   DataRow(
@@ -233,7 +236,7 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
 
                     //for data row color
                     cells: <DataCell>[
-                      DataCell(Text('Consumo')),
+                      const DataCell(Text('Consumo')),
                       DataCell(Text(mensajeConsumo)),
                     ],
                   ),
@@ -290,7 +293,8 @@ themeSetter(changeTheme) {
             brightness: Brightness.dark,
             background: Colors.grey.shade900,
           ),
-          drawerTheme: DrawerThemeData(backgroundColor: Colors.grey.shade900),
+          drawerTheme:
+              DrawerThemeData(backgroundColor: Color.fromARGB(255, 32, 24, 22)),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(Colors.green.shade900),
@@ -303,13 +307,13 @@ themeSetter(changeTheme) {
       : ThemeData(
           useMaterial3: true,
           appBarTheme: AppBarTheme(
-              backgroundColor: Color.fromARGB(255, 64, 167, 67),
+              backgroundColor: Color.fromARGB(255, 57, 143, 60),
               systemOverlayStyle: SystemUiOverlayStyle(
                 systemNavigationBarColor:
-                    Colors.grey.shade200, // Navigation bar
-                statusBarColor: Color.fromARGB(255, 64, 167, 67), // Status bar
+                    Colors.grey.shade300, // Navigation bar
+                statusBarColor: Color.fromARGB(255, 57, 143, 60), // Status bar
               ),
-              titleTextStyle: TextStyle(
+              titleTextStyle: const TextStyle(
                 color: Colors.white,
                 fontSize: 22,
               )),
@@ -319,13 +323,14 @@ themeSetter(changeTheme) {
           colorScheme: ColorScheme.fromSeed(
             seedColor: Colors.white,
             brightness: Brightness.light,
-            background: Colors.grey.shade200,
+            background: Colors.grey.shade300,
           ),
-          drawerTheme: DrawerThemeData(backgroundColor: Colors.grey.shade200),
+          drawerTheme: DrawerThemeData(
+              backgroundColor: Color.fromARGB(255, 234, 230, 233)),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ButtonStyle(
               backgroundColor:
-                  MaterialStateProperty.all(Color.fromARGB(255, 64, 167, 67)),
+                  MaterialStateProperty.all(Color.fromARGB(255, 57, 143, 60)),
               foregroundColor: MaterialStateProperty.all(
                 const Color.fromARGB(228, 241, 241, 241),
               ),

@@ -29,9 +29,9 @@ class NavDrawer extends StatelessWidget {
             child: const Text(
               'Opciones',
               style: TextStyle(
-                color: Colors.white,
-                fontSize: 25,
-              ),
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold),
             ),
           ),
           ListTile(
