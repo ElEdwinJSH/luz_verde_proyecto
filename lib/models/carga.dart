@@ -14,4 +14,14 @@ class CargaElectrica {
     required this.horasAlDia,
     required this.energiaDia,
   });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'elemento': elemento,
+      'cantidad': cantidad,
+      'potencia': potencia,
+      'horasAlDia': horasAlDia,
+      'energiaDia': energiaDia
+    };
+  }
 }

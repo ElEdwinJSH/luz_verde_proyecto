@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:luz_verde_proyecto/screens/editar_dispositivo.dart';
 import '../models/carga.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:luz_verde_proyecto/providers/theme.dart';
-import 'package:provider/provider.dart';
+ import 'package:provider/provider.dart';
+import 'package:luz_verde_proyecto/providers/list_carga_electrica.dart';
+ 
 
 class CargaItem extends StatelessWidget {
   final CargaElectrica carga;
@@ -11,7 +13,9 @@ class CargaItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentTheme = Provider.of<ThemeProvider>(context);
+     final cargas = Provider.of<ListCargaElectricaProvider>(context);
+
+ 
     return Slidable(
       startActionPane: ActionPane(
         // A motion is a widget used to control how the pane animates.
@@ -23,18 +27,45 @@ class CargaItem extends StatelessWidget {
         children: [
           // A SlidableAction can have an icon and/or a label.
           SlidableAction(
-            onPressed: (context) => 1,
+            onPressed: (context) => showDialog<String>(
+              context: context,
+              builder: (BuildContext context) => AlertDialog(
+                title: const Text('Eliminar'),
+                content: const Text('¿Estas seguro?'),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'Cancelar'),
+                    child: const Text('Cancelar'),
+                  ),
+                  TextButton(
+                    onPressed: () =>
+                        {cargas.removeCargas(carga), Navigator.pop(context)},
+                    child: const Text('Si'),
+                  )
+                ],
+              ),
+            ),
+
             backgroundColor: const Color(0xFFFE4A49),
             foregroundColor: Colors.white,
             icon: Icons.delete,
-            label: 'Delete',
+            label: 'Eliminar',
+            //cargas.removeCargas(carga)
           ),
           SlidableAction(
-            onPressed: (context) => 1,
+            onPressed: (context) {
+              // Navegar a la pantalla de edición de dispositivos
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) =>
+                      EditarDispositivos(cargaElectrica: carga),
+                ),
+              );
+            },
             backgroundColor: const Color(0xFF21B7CA),
             foregroundColor: Colors.white,
-            icon: Icons.share,
-            label: 'Share',
+            icon: Icons.edit,
+            label: 'Editar',
           ),
         ],
       ),
