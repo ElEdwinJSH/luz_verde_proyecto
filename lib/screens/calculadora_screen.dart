@@ -5,14 +5,15 @@ import 'package:luz_verde_proyecto/providers/list_carga_electrica.dart';
 import 'package:luz_verde_proyecto/screens/agregar_dispositivo_screen.dart';
 
 import '../widgets/carga_item.dart';
- 
+
 import 'package:provider/provider.dart';
 import '../widgets/widgets.dart';
 
-String mesSeleccionado = "Enero";
- import 'package:luz_verde_proyecto/providers/theme.dart';
 import 'package:provider/provider.dart';
- 
+import 'package:luz_verde_proyecto/providers/theme.dart';
+
+String mesSeleccionado = "Enero";
+
 class CalculadoraScreen extends StatefulWidget {
   const CalculadoraScreen({Key? key}) : super(key: key);
 
