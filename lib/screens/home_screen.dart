@@ -1,9 +1,5 @@
 import 'package:luz_verde_proyecto/providers/theme.dart';
 import 'package:provider/provider.dart';
-import 'dart:ui';
-import '../models/carga.dart';
-import '../widgets/carga_item.dart';
-import 'package:luz_verde_proyecto/models/theme_preferences.dart';
 import 'package:flutter/material.dart';
 
 import 'package:luz_verde_proyecto/screens/graficas_screen.dart';
@@ -12,7 +8,6 @@ import 'package:luz_verde_proyecto/screens/lista_dispositivo_screen.dart';
 import '../screens/calculadora_screen.dart';
 import '../screens/agregar_dispositivo_screen.dart';
 import 'package:luz_verde_proyecto/providers/list_carga_electrica.dart';
-import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

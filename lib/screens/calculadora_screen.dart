@@ -2,16 +2,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:luz_verde_proyecto/providers/change_theme_provider.dart';
 import 'package:luz_verde_proyecto/providers/list_carga_electrica.dart';
-import 'package:luz_verde_proyecto/screens/agregar_dispositivo_screen.dart';
-
 
 import '../widgets/carga_item.dart';
 
 import 'package:provider/provider.dart';
 import '../widgets/nav_drawer.dart';
 import '../widgets/widgets.dart';
-import 'package:luz_verde_proyecto/providers/theme.dart';
-import 'package:provider/provider.dart';
 
 String mesSeleccionado = "Enero";
 
@@ -82,7 +78,6 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
   }
 }
 ''');
-
 
     final List<String> meses = <String>[
       'Enero',
@@ -165,7 +160,6 @@ class _CalculadoraScreenState extends State<CalculadoraScreen> {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),
-
                     );
                   }).toList()),
             ],
@@ -303,48 +297,3 @@ themeSetter(changeTheme) {
 }
 
 //cambia el tema
-themeSetter(changeTheme) {
-  return changeTheme.isdarktheme
-      ? ThemeData(
-          useMaterial3: true,
-          appBarTheme: AppBarTheme(backgroundColor: Colors.green.shade900),
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.white,
-            brightness: Brightness.dark,
-          ),
-          drawerTheme: const DrawerThemeData(backgroundColor: Colors.black54),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.green.shade900),
-              foregroundColor: MaterialStateProperty.all(
-                const Color.fromARGB(228, 241, 241, 241),
-              ),
-            ),
-          ),
-        )
-      : ThemeData(
-          useMaterial3: true,
-          appBarTheme: const AppBarTheme(
-              backgroundColor: Colors.green,
-              titleTextStyle: TextStyle(
-                color: Colors.white,
-                fontSize: 22,
-              )),
-          drawerTheme: DrawerThemeData(backgroundColor: Colors.white),
-          iconButtonTheme: const IconButtonThemeData(
-              style: ButtonStyle(
-                  iconColor: MaterialStatePropertyAll(Colors.white))),
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.white,
-            brightness: Brightness.light,
-          ),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.green),
-              foregroundColor: MaterialStateProperty.all(
-                const Color.fromARGB(228, 241, 241, 241),
-              ),
-            ),
-          ),
-        );
-}

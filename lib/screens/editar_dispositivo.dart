@@ -61,7 +61,7 @@ class _EditarDispositivosState extends State<EditarDispositivos> {
               children: [
                 TextFormField(
                   controller: _elementoController,
-                  decoration: InputDecoration(labelText: 'Elemento'),
+                  decoration: const InputDecoration(labelText: 'Elemento'),
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Por favor, ingrese un elemento';
@@ -82,7 +82,8 @@ class _EditarDispositivosState extends State<EditarDispositivos> {
                 ),
                 TextFormField(
                   controller: _potenciaController,
-                  decoration: InputDecoration(labelText: 'Potencia (Watts)'),
+                  decoration:
+                      const InputDecoration(labelText: 'Potencia (Watts)'),
                   keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -93,7 +94,7 @@ class _EditarDispositivosState extends State<EditarDispositivos> {
                 ),
                 TextFormField(
                   controller: _horasAlDiaController,
-                  decoration: InputDecoration(labelText: 'Horas al día'),
+                  decoration: const InputDecoration(labelText: 'Horas al día'),
                   keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -127,7 +128,7 @@ class _EditarDispositivosState extends State<EditarDispositivos> {
                       Navigator.of(context).pop(cargaActualizada);
                     }
                   },
-                  child: Text('Guardar Cambios'),
+                  child: const Text('Guardar Cambios'),
                 ),
               ],
             ),
