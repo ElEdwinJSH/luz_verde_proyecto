@@ -128,7 +128,8 @@ class _EditarDispositivosState extends State<EditarDispositivos> {
                       final potencia = int.parse(_potenciaController.text);
                       final horasAlDia =
                           double.parse(_horasAlDiaController.text);
-                      final energiaDia = (potencia * horasAlDia) / 1000;
+                      final energiaDia =
+                          (potencia * horasAlDia * cantidad) / 1000;
 
                       final cargaActualizada = CargaElectrica(
                         elemento: widget.cargaElectrica.elemento,
