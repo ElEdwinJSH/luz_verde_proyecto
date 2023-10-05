@@ -1,4 +1,3 @@
-import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:luz_verde_proyecto/models/carga.dart';
 import 'package:luz_verde_proyecto/providers/change_theme_provider.dart';
@@ -6,6 +5,7 @@ import 'package:luz_verde_proyecto/providers/list_carga_electrica.dart';
 import 'package:luz_verde_proyecto/widgets/indicators.dart';
 import 'package:luz_verde_proyecto/widgets/random_colors.dart';
 import 'package:provider/provider.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 class GraficasCargas extends StatelessWidget {
   const GraficasCargas({Key? key}) : super(key: key);

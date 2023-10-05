@@ -1,4 +1,4 @@
-import 'package:luz_verde_proyecto/models/theme_preferences.dart';
+import 'package:luz_verde_proyecto/providers/theme.dart';
 import 'package:provider/provider.dart';
 import 'dart:ui';
 import '../models/carga.dart';
@@ -54,19 +54,4 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   // Función para agregar un dispositivo
-  void _agregarDispositivo(BuildContext context) async {
-    final result =
-        await Navigator.of(context).pushNamed('/agregar_dispositivo');
-    if (result != null) {
-      setState(() {
-        cargas.add(result as CargaElectrica);
-      });
-    }
-  }
-
-  void _eliminarDispositivo(int index) {
-    setState(() {
-      cargas.removeAt(index);
-    });
-  }
 }
